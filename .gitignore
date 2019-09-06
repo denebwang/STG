@@ -1,0 +1,6 @@
+STG/Debug/*
+STG/STG/Debug/*
+STG/Release/*
+STG/STG/Release/*
+.vs/*
+STG/.vs/*
