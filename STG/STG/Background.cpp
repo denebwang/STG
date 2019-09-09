@@ -12,10 +12,10 @@
 
 
 int Background::totalFrames = 0;
-int Background::framerate = 60;
+float Background::framerate = 60;
 float Background::fps = 0;
 float Background::currentTime = timeGetTime();
-float Background::iniTime = currentTime;
+float Background::iniTime = 0.0f;
 
 void Background::initGame()
 {
@@ -73,7 +73,6 @@ void Background::update()
 			SetTimer(2, 2000, NULL);
 		}
 	}
-	m_Satori.move((double)totalFrames/50);
 
 	if ((currentTime - iniTime) >= 90000)
 	{
@@ -81,27 +80,13 @@ void Background::update()
 		stopGame();
 		return;
 	}
-	CalculateFPS();
+	fps = CalculateFPS();
 	totalFrames++;
 	currentTime = timeGetTime();
 	Invalidate();
 }
 
-void Background::CalculateFPS()
-{
 
-	static int frameCount = 0;
-	static float currentTime = 0.0f;
-	static float lastTime = 0.0f;
-	frameCount++;
-	currentTime = timeGetTime() / 1000.0f;
-	if (currentTime - lastTime > 1.0f)
-	{
-		fps = frameCount / (currentTime - lastTime);
-		lastTime = currentTime;
-		frameCount = 0;
-	}
-}
 
 BOOL Background::create(RECT& rect, CWnd* pParentWnd, UINT nID)
 {
@@ -136,7 +121,7 @@ void Background::OnPaint()
 		MemDC.SelectObject(&bitmap);
 		MemDC.SetStretchBltMode(HALFTONE);
 		MemDC.FillSolidRect(rectBig, RGB(0, 0, 0));
-		m_pngBackground.Draw(MemDC.m_hDC, 0, 0,768,898,0,898-getBGpos(),768,898);
+		m_pngBackground.Draw(MemDC.m_hDC, 0, 0,768,898,0,898-getBGpos(totalFrames),768,898);
 
 		{
 			CFont font;
@@ -155,7 +140,7 @@ void Background::OnPaint()
 
 			MemDC.TextOutW(30, 30, str);
 
-			str.Format(TEXT("%.1f"), 90 - (currentTime - iniTime) / 1000.0f);
+			str.Format(TEXT("%.1f"), 90.0f - (currentTime - iniTime) / 1000.0f);
 
 			MemDC.TextOutW(350, 30, str);
 
@@ -168,65 +153,27 @@ void Background::OnPaint()
 			MemDC.TextOutW(550, 50, str);
 		}
 
-		if (m_Player.m_pngPlayer.GetBPP() == 32)
-		{
-			int i;
-			int j;
-			for (i = 0; i < m_Player.m_pngPlayer.GetWidth(); i++)
-			{
-				for (j = 0; j < m_Player.m_pngPlayer.GetHeight(); j++)
-				{
-					byte* pByte = (byte*)m_Player.m_pngPlayer.GetPixelAddress(i, j);
-					pByte[0] = pByte[0] * pByte[3] / 255;
-					pByte[1] = pByte[1] * pByte[3] / 255;
-					pByte[2] = pByte[2] * pByte[3] / 255;
-				}
-			}
-		}
-		m_Player.m_pngPlayer.Draw(MemDC.m_hDC, m_Player.xPos - 32, m_Player.yPos - 48,64,96,64*(totalFrames%8),0,64,96);
 
-		if (m_Satori.m_pngSatori.GetBPP() == 32)
+		m_Player.m_pngPlayer.Draw(MemDC.m_hDC,
+			m_Player.xPos - 32, m_Player.yPos - 48,
+			64, 96, 64 * ((totalFrames/5) % 8), 0, 64, 96);
+		if (m_Player.slow)
 		{
-			int i;
-			int j;
-			for (i = 0; i < m_Satori.m_pngSatori.GetWidth(); i++)
-			{
-				for (j = 0; j < m_Satori.m_pngSatori.GetHeight(); j++)
-				{
-					byte* pByte = (byte*)m_Satori.m_pngSatori.GetPixelAddress(i, j);
-					pByte[0] = pByte[0] * pByte[3] / 255;
-					pByte[1] = pByte[1] * pByte[3] / 255;
-					pByte[2] = pByte[2] * pByte[3] / 255;
-				}
-			}
+			m_Player.m_pngHitbox.Draw(MemDC.m_hDC,
+				m_Player.xPos - 64, m_Player.yPos - 64, 128, 128, 0, 0, 128, 128);
 		}
-		m_Satori.m_pngSatori.Draw(MemDC.m_hDC, m_Satori.xPos - 48, m_Satori.yPos - 64,96,128,96*((totalFrames/2)%4),128*((int)(((totalFrames/2)%8)/4)),96,128);
+
+		m_Satori.m_pngSatori.Draw(MemDC.m_hDC,
+			m_Satori.xPos - 48, m_Satori.yPos - 64,
+			96, 128, 96 * ((totalFrames / 10) % 4), 128 * ((int)(((totalFrames / 10) % 8) / 4)), 96, 128);
 
 		for (auto iter = m_Satori.bullets.begin(); iter != m_Satori.bullets.end(); iter++)
-		{
-			if ((*iter)->m_pngBullet.GetBPP() == 32)
-			{
-				int i;
-				int j;
-				for (i = 0; i < (*iter)->m_pngBullet.GetWidth(); i++)
-				{
-					for (j = 0; j < (*iter)->m_pngBullet.GetHeight(); j++)
-					{
-						byte* pByte = (byte*)(*iter)->m_pngBullet.GetPixelAddress(i, j);
-						pByte[0] = pByte[0] * pByte[3] / 255;
-						pByte[1] = pByte[1] * pByte[3] / 255;
-						pByte[2] = pByte[2] * pByte[3] / 255;
-					}
-				}
-			}
 			(*iter)->m_pngBullet.Draw(MemDC.m_hDC, (*iter)->xPos - 8, (*iter)->yPos - 14);
-		}
 
 		dc.StretchBlt(rectBig.left, rectBig.top, rectBig.Width(), rectBig.Height(), &MemDC, rectBig.left, rectBig.top, rectBig.Width(), rectBig.Height(), SRCCOPY);
 		
 		ValidateRect(&rectBig);
 		bitmap.DeleteObject();
-		ReleaseDC(&dc);
 		DeleteDC(MemDC);
 	}
 }
@@ -250,12 +197,4 @@ void Background::OnTimer(UINT_PTR nIDEvent)
 BOOL Background::OnEraseBkgnd(CDC* pDC)
 {
 	return TRUE;
-}
-
-
-int Background::getBGpos()
-{
-	int movespeed = 5;
-	int pos = (movespeed * totalFrames) % 768;
-	return pos;
 }

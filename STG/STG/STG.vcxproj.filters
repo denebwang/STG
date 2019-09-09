@@ -45,6 +45,9 @@
     <ClInclude Include="bullet.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="lib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="STG.cpp">
@@ -66,6 +69,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="bullet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="lib.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

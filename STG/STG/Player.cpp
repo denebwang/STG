@@ -14,15 +14,25 @@ Player::Player()
 	yPos = 820;
 	xSpeed = ySpeed = 0;
 	m_pngPlayer.Load(TEXT("player.png"));
-	rebirth = false;
+	m_pngHitbox.Load(TEXT("hitbox.png"));
+	GetAlpha(m_pngPlayer);	
+	GetAlpha(m_pngHitbox);
+	rebirth = slow =false;
 }
 
 
 void Player::move()
 { 
 	if (GetAsyncKeyState(VK_SHIFT) < 0)
+	{
 		speed = 5;
-	else speed = 10;
+		slow = true;
+	}
+	else
+	{
+		speed = 10;
+		slow = false;
+	}
 
 	if (GetKeyState(VK_UP)< 0)
 		ySpeed = -speed;

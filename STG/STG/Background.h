@@ -17,7 +17,7 @@ public:
 	satori m_Satori;
 
 	static int totalFrames;
-	static int framerate;
+	static float framerate;
 	static float fps;
 	static float currentTime;
 	static float iniTime;
@@ -27,14 +27,12 @@ public:
 	void initGame();
 	BOOL startGame();
 	void stopGame();
-	void CalculateFPS();
 	void update();
 
 	Background() {};
 	~Background() {};
 
 	BOOL create(RECT& rect, CWnd* pParentWnd, UINT nID);
-	int getBGpos();
 
 
 protected:

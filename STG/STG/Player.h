@@ -13,8 +13,10 @@ public:
 	int xSpeed;
 	int ySpeed;
 	static int speed;
+	bool slow;
 	bool rebirth;
 	CImage m_pngPlayer;
+	CImage m_pngHitbox;
 	
 	void move();
 	double dist(bullet* b);

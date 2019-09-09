@@ -9,8 +9,8 @@
 
 // 添加要在此处预编译的标头
 #include "framework.h"
+#include "lib.h"
 #include <afxwin.h>
 #define ATR 3.14159/180.0
-
 
 #endif //PCH_H

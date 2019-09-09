@@ -11,6 +11,7 @@ bullet::bullet(float xpos, float ypos, float angle_, int speed_)
 	xPos = xpos;
 	yPos = ypos;
 	m_pngBullet.Load(TEXT("bullet.png"));
+	GetAlpha(m_pngBullet);
 }
 
 void bullet::move()
