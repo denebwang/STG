@@ -33,8 +33,10 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnUpdateStart(CCmdUI* pCmdUI);
-	void PlayMusic(bool mcheck);
-	afx_msg void OnUpdateMusic(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateQuit(CCmdUI* pCmdUI);
 	afx_msg void OnStart();
+	afx_msg void OnEasy();
+	afx_msg void OnNormal();
+	afx_msg void OnHard();
+	afx_msg void OnLunatic();
 };

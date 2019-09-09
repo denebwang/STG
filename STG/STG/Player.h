@@ -13,11 +13,12 @@ public:
 	int xSpeed;
 	int ySpeed;
 	static int speed;
+	bool rebirth;
 	CImage m_pngPlayer;
 	
-
 	void move();
 	double dist(bullet* b);
+	void death();
 public:
 	DECLARE_MESSAGE_MAP()
 };

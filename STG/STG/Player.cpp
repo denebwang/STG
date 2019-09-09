@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "resource.h"
 #include<cmath>
+#include <mmsystem.h>
 BEGIN_MESSAGE_MAP(Player, CWnd)
 END_MESSAGE_MAP()
 
@@ -13,6 +14,7 @@ Player::Player()
 	yPos = 820;
 	xSpeed = ySpeed = 0;
 	m_pngPlayer.Load(TEXT("player.png"));
+	rebirth = false;
 }
 
 
@@ -49,4 +51,14 @@ void Player::move()
 double Player::dist(bullet* b)
 {
 	return sqrt(double((xPos-b->xPos)* (xPos - b->xPos)+(yPos- b->yPos)* (yPos - b->yPos)));
+}
+
+void Player::death()
+{
+	xPos = 384;
+	yPos = 820;
+	xSpeed = ySpeed = 0;
+	mciSendString(TEXT("close dead.wav"), NULL, 0, NULL);
+	mciSendString(TEXT("play dead.wav"), NULL, 0, NULL);
+	rebirth = true;
 }

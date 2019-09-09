@@ -15,6 +15,6 @@ bullet::bullet(float xpos, float ypos, float angle_, int speed_)
 
 void bullet::move()
 {
-	xPos += double(speed) * cos(angle*ATR);
+	xPos += double(speed) * cos(angle * ATR);
 	yPos += double(speed) * sin(angle * ATR);
 }

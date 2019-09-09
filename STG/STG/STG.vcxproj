@@ -223,11 +223,9 @@
   <ItemGroup>
     <Image Include="..\..\..\..\FFOutput\icon.ico" />
     <Image Include="..\..\..\..\FFOutput\stage.bmp" />
-    <Image Include="..\player.bmp" />
-    <Image Include="..\player.png" />
+    <Image Include="icon.ico" />
     <Image Include="bullet.png" />
     <Image Include="player.png" />
-    <Image Include="res\STG.ico" />
     <Image Include="satori.png" />
     <Image Include="stage.png" />
   </ItemGroup>

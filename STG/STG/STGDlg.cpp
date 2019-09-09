@@ -8,7 +8,7 @@
 #include "STGDlg.h"
 #include "afxdialogex.h"
 #include "Background.h"
-#include <mmsystem.h>
+#include "resource.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -33,9 +33,12 @@ BEGIN_MESSAGE_MAP(CSTGDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_UPDATE_COMMAND_UI(ID_START, &CSTGDlg::OnUpdateStart)
-	ON_UPDATE_COMMAND_UI(ID_MUSIC, &CSTGDlg::OnUpdateMusic)
 	ON_UPDATE_COMMAND_UI(ID_QUIT, &CSTGDlg::OnUpdateQuit)
 	ON_COMMAND(ID_START, &CSTGDlg::OnStart)
+	ON_COMMAND(ID_EASY, &CSTGDlg::OnEasy)
+	ON_COMMAND(ID_NORMAL, &CSTGDlg::OnNormal)
+	ON_COMMAND(ID_HARD, &CSTGDlg::OnHard)
+	ON_COMMAND(ID_LUNATIC, &CSTGDlg::OnLunatic)
 END_MESSAGE_MAP()
 
 
@@ -50,8 +53,11 @@ BOOL CSTGDlg::OnInitDialog()
 	m_menu.LoadMenuW(IDR_MENU);
 	SetMenu(& m_menu);
 
-	m_Background.create(CRect(0, 0, 0, 0), this, IDB_BACKGROUND);
+	CMenu* level_menu= m_menu.GetSubMenu(1)->GetSubMenu(0);
+	level_menu->CheckMenuRadioItem(0, 3, 1, MF_BYPOSITION);
 
+	m_Background.create(CRect(0, 0, 0, 0), this, IDB_BACKGROUND);
+	m_Background.level = LEVEL_NORM;
 	::SetWindowPos(this->m_hWnd, HWND_BOTTOM, 0, 0, 768, 960, SWP_NOZORDER);
 	return TRUE; 
 }
@@ -90,29 +96,6 @@ void CSTGDlg::OnUpdateStart(CCmdUI* pCmdUI)
 	// TODO: 在此添加命令更新用户界面处理程序代码
 }
 
-void CSTGDlg::PlayMusic(bool mcheck)
-{
-	if (mcheck)
-		sndPlaySound(TEXT("少女さとり ～ 3rd eye.wav"), SND_ASYNC);
-	else
-		sndPlaySound(NULL, SND_PURGE);
-}
-
-
-void CSTGDlg::OnUpdateMusic(CCmdUI* pCmdUI)
-{
-	CWnd* pMain = AfxGetMainWnd();
-	CMenu* pMenu = pMain->GetMenu();
-	bool bcheck = (bool)pMenu->GetMenuState(ID_MUSIC, MF_CHECKED);
-	if (bcheck)
-		pMenu->CheckMenuItem(ID_MUSIC, MF_BYCOMMAND | MF_UNCHECKED);
-	else
-		pMenu->CheckMenuItem(ID_MUSIC, MF_BYCOMMAND | MF_CHECKED);
-	PlayMusic(!bcheck);
-}
-
-
-
 void CSTGDlg::OnUpdateQuit(CCmdUI* pCmdUI)
 {
 	CDialog::OnCancel();
@@ -123,4 +106,36 @@ void CSTGDlg::OnStart()
 {
 	if(!m_Background.startGame())
 		CDialog::OnCancel();
+}
+
+
+void CSTGDlg::OnEasy()
+{
+	CMenu* level_menu = m_menu.GetSubMenu(1)->GetSubMenu(0);
+	level_menu->CheckMenuRadioItem(0, 3, 0, MF_BYPOSITION);
+	m_Background.level = LEVEL_EASY;
+}
+
+
+void CSTGDlg::OnNormal()
+{
+	CMenu* level_menu = m_menu.GetSubMenu(1)->GetSubMenu(0);
+	level_menu->CheckMenuRadioItem(0, 3, 1, MF_BYPOSITION);
+	m_Background.level = LEVEL_NORM;
+}
+
+
+void CSTGDlg::OnHard()
+{
+	CMenu* level_menu = m_menu.GetSubMenu(1)->GetSubMenu(0);
+	level_menu->CheckMenuRadioItem(0, 3, 2, MF_BYPOSITION);
+	m_Background.level = LEVEL_HARD;
+}
+
+
+void CSTGDlg::OnLunatic()
+{
+	CMenu* level_menu = m_menu.GetSubMenu(1)->GetSubMenu(0);
+	level_menu->CheckMenuRadioItem(0, 3, 3, MF_BYPOSITION);
+	m_Background.level = LEVEL_LUNA;
 }

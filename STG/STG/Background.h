@@ -13,19 +13,29 @@ class Background : public CWnd
 {
 public:
 	int death;
-	int fps;
-	int totalFrames;
 	Player m_Player;
 	satori m_Satori;
+
+	static int totalFrames;
+	static int framerate;
+	static float fps;
+	static float currentTime;
+	static float iniTime;
 
 	int level;
 
 	void initGame();
 	BOOL startGame();
-	Background();
-	void update(int t);
-	virtual ~Background();
-	virtual BOOL create(RECT& rect, CWnd* pParentWnd, UINT nID);
+	void stopGame();
+	void CalculateFPS();
+	void update();
+
+	Background() {};
+	~Background() {};
+
+	BOOL create(RECT& rect, CWnd* pParentWnd, UINT nID);
+	int getBGpos();
+
 
 protected:
 	CImage m_pngBackground;

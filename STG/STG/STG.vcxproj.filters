@@ -80,21 +80,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\STG.ico">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="..\..\..\..\FFOutput\stage.bmp">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="..\..\..\..\FFOutput\icon.ico">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="..\player.bmp">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="..\player.png">
-      <Filter>资源文件</Filter>
-    </Image>
     <Image Include="player.png">
       <Filter>资源文件</Filter>
     </Image>
@@ -105,6 +90,15 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="satori.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="icon.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="..\..\..\..\FFOutput\icon.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="..\..\..\..\FFOutput\stage.bmp">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>
