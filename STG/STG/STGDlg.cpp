@@ -21,7 +21,7 @@
 CSTGDlg::CSTGDlg(CWnd* pParent)
 	: CDialogEx(IDD_STG_DIALOG, pParent)
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON);
 }
 
 void CSTGDlg::DoDataExchange(CDataExchange* pDX)
@@ -55,7 +55,7 @@ BOOL CSTGDlg::OnInitDialog()
 	CMenu* level_menu= m_menu.GetSubMenu(1)->GetSubMenu(0);
 	level_menu->CheckMenuRadioItem(0, 3, 1, MF_BYPOSITION);
 
-	m_Background.create(CRect(0, 0, 0, 0), this, IDB_BACKGROUND);
+	m_Background.create(CRect(0, 0, 0, 0), this, IDB_BG);
 	m_Background.level = LEVEL_NORM;
 	::SetWindowPos(this->m_hWnd, HWND_BOTTOM, 0, 0, 768, 960, SWP_NOZORDER);
 	return TRUE; 

@@ -223,7 +223,6 @@
     <None Include="res\STG.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\FFOutput\icon.ico" />
     <Image Include="icon.ico" />
     <Image Include="bullet.png" />
     <Image Include="player.png" />

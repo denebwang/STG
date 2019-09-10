@@ -4,9 +4,12 @@
 //
 #define IDD_STG_DIALOG                  102
 #define IDR_MENU                        137
-#define IDR_MAINFRAME                   141
 #define IDB_PNG1                        143
 #define IDB_PNG2                        144
+#define IDI_ICON                        148
+#define IDB_BULLET                      151
+#define IDB_PNG4                        152
+#define IDB_BG                          152
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -33,7 +36,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        148
+#define _APS_NEXT_RESOURCE_VALUE        153
 #define _APS_NEXT_COMMAND_VALUE         32792
 #define _APS_NEXT_CONTROL_VALUE         1005
 #define _APS_NEXT_SYMED_VALUE           101
