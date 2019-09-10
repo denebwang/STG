@@ -153,11 +153,11 @@ void Background::OnPaint()
 		m_Player.m_pngPlayer.Draw(MemDC.m_hDC,
 			m_Player.xPos - 32, m_Player.yPos - 48,
 			64, 96, 64 * ((totalFrames/5) % 8), 0, 64, 96);
+
 		if (m_Player.slow)
-		{
 			m_Player.m_pngHitbox.Draw(MemDC.m_hDC,
-				m_Player.xPos - 64, m_Player.yPos - 64, 128, 128, 0, 0, 128, 128);
-		}
+				m_Player.xPos - 64, m_Player.yPos - 64, 
+				128, 128, 0, 0, 128, 128);
 
 		m_Satori.m_pngSatori.Draw(MemDC.m_hDC,
 			m_Satori.xPos - 48, m_Satori.yPos - 64,

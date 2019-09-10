@@ -4,14 +4,9 @@
 //
 #define IDD_STG_DIALOG                  102
 #define IDR_MENU                        137
-#define IDB_BACKGROUND                  139
 #define IDR_MAINFRAME                   141
 #define IDB_PNG1                        143
-#define IDB_PLAYER                      143
 #define IDB_PNG2                        144
-#define IDB_STAGE                       144
-#define IDB_PNG3                        145
-#define IDB_PNG4                        146
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773

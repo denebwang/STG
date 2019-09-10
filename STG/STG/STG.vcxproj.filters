@@ -104,8 +104,5 @@
     <Image Include="..\..\..\..\FFOutput\icon.ico">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="..\..\..\..\FFOutput\stage.bmp">
-      <Filter>资源文件</Filter>
-    </Image>
   </ItemGroup>
 </Project>

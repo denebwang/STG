@@ -12,20 +12,7 @@ satori::satori()
 	GetAlpha(bullet::m_pngBullet);
 	GetAlpha(m_pngSatori);
 }
-int calBulletSpeed(int level)
-{
-	switch (level)
-	{
-	case 2:
-		return 3;
-	case 4:
-		return 4;
-	case 6: 
-		return 5;
-	case 8:
-		return 6;
-	}
-}
+
 
 void satori::shoot(int t,float level)
 {
