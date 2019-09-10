@@ -12,27 +12,23 @@
 
 
 int Background::totalFrames = 0;
-float Background::framerate = 60;
 float Background::fps = 0;
 float Background::currentTime = timeGetTime();
-float Background::iniTime = 0.0f;
+float Background::iniTime = currentTime;
 
-void Background::initGame()
-{
-	death = 0;
-}
 
-BOOL Background::startGame()
+void Background::startGame()
 {
-	SetTimer(1, 1000/framerate, NULL);
-	initGame();
+	SetTimer(1, 15, NULL);
+	death = totalFrames = 0;
+	m_Satori.bullets.clear();
 	iniTime = timeGetTime();
 	sndPlaySound(TEXT("少女さとり ～ 3rd eye.wav"), SND_ASYNC);
-	return TRUE;
 }
 
 void Background::stopGame()
 {
+	KillTimer(1);
 	sndPlaySound(NULL, SND_ASYNC);
 	CString str;
 	str.Format(TEXT("您一共死了%d次\n再来一把吗"), death);
@@ -40,11 +36,12 @@ void Background::stopGame()
 	switch (result)
 	{
 	case IDYES:
-		m_Satori.bullets.clear();
 		startGame();
 		break;
 	case IDNO:
 		exit(0);
+		break;
+	default:
 		break;
 	}
 }
@@ -52,7 +49,8 @@ void Background::stopGame()
 void Background::update()
 {
 	m_Player.move();
-	m_Satori.shoot(totalFrames,level);
+	if(totalFrames%2)
+		m_Satori.shoot(totalFrames,level);
 	for (auto iter = m_Satori.bullets.begin(); iter != m_Satori.bullets.end(); iter++)
 	{
 		(*iter)->move();
@@ -62,7 +60,7 @@ void Background::update()
 			iter = m_Satori.bullets.erase(iter);
 			delete tempptr;
 		}
-		if (m_Player.dist((*iter)) < 10&&!m_Player.rebirth)
+		if (!m_Player.rebirth && m_Player.dist((*iter)) < 8)
 		{
 			auto tempptr = *iter;
 			iter = m_Satori.bullets.erase(iter);
@@ -76,9 +74,7 @@ void Background::update()
 
 	if ((currentTime - iniTime) >= 90000)
 	{
-		KillTimer(1);
 		stopGame();
-		return;
 	}
 	fps = CalculateFPS();
 	totalFrames++;
@@ -140,17 +136,17 @@ void Background::OnPaint()
 
 			MemDC.TextOutW(30, 30, str);
 
-			str.Format(TEXT("%.1f"), 90.0f - (currentTime - iniTime) / 1000.0f);
+			str.Format(TEXT("%.2f"), 90.0f - (currentTime - iniTime) / 1000.0f);
 
 			MemDC.TextOutW(350, 30, str);
 
-			str.Format(TEXT("FPS: %.1f"), fps);
+			str.Format(TEXT("%.2fFPS"), fps);
 
-			MemDC.TextOutW(650, 800, str);
+			MemDC.TextOutW(670, 850, str);
 
 			str.Format(TEXT("「波与粒的境界」"));
 
-			MemDC.TextOutW(550, 50, str);
+			MemDC.TextOutW(590, 30, str);
 		}
 
 
@@ -168,7 +164,7 @@ void Background::OnPaint()
 			96, 128, 96 * ((totalFrames / 10) % 4), 128 * ((int)(((totalFrames / 10) % 8) / 4)), 96, 128);
 
 		for (auto iter = m_Satori.bullets.begin(); iter != m_Satori.bullets.end(); iter++)
-			(*iter)->m_pngBullet.Draw(MemDC.m_hDC, (*iter)->xPos - 8, (*iter)->yPos - 14);
+			bullet::m_pngBullet.Draw(MemDC.m_hDC, (*iter)->xPos - 8, (*iter)->yPos - 14);
 
 		dc.StretchBlt(rectBig.left, rectBig.top, rectBig.Width(), rectBig.Height(), &MemDC, rectBig.left, rectBig.top, rectBig.Width(), rectBig.Height(), SRCCOPY);
 		

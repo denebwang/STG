@@ -32,7 +32,6 @@ void CSTGDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CSTGDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_UPDATE_COMMAND_UI(ID_START, &CSTGDlg::OnUpdateStart)
 	ON_UPDATE_COMMAND_UI(ID_QUIT, &CSTGDlg::OnUpdateQuit)
 	ON_COMMAND(ID_START, &CSTGDlg::OnStart)
 	ON_COMMAND(ID_EASY, &CSTGDlg::OnEasy)
@@ -91,11 +90,6 @@ HCURSOR CSTGDlg::OnQueryDragIcon()
 }
 
 
-void CSTGDlg::OnUpdateStart(CCmdUI* pCmdUI)
-{
-	// TODO: 在此添加命令更新用户界面处理程序代码
-}
-
 void CSTGDlg::OnUpdateQuit(CCmdUI* pCmdUI)
 {
 	CDialog::OnCancel();
@@ -104,8 +98,7 @@ void CSTGDlg::OnUpdateQuit(CCmdUI* pCmdUI)
 
 void CSTGDlg::OnStart()
 {
-	if(!m_Background.startGame())
-		CDialog::OnCancel();
+	m_Background.startGame();
 }
 
 

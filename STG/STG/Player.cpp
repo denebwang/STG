@@ -6,7 +6,7 @@
 BEGIN_MESSAGE_MAP(Player, CWnd)
 END_MESSAGE_MAP()
 
-int Player::speed = 10;
+float Player::speed = 10;
 
 Player::Player()
 {
@@ -25,12 +25,12 @@ void Player::move()
 { 
 	if (GetAsyncKeyState(VK_SHIFT) < 0)
 	{
-		speed = 5;
+		speed = 2.5;
 		slow = true;
 	}
 	else
 	{
-		speed = 10;
+		speed = 5;
 		slow = false;
 	}
 

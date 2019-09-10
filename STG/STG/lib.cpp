@@ -39,7 +39,7 @@ int CalculateFPS()
 
 int getBGpos(int f)
 {
-	int movespeed = 5;
+	int movespeed = 2;
 	int pos = (movespeed * f) % 768;
 	return pos;
 }

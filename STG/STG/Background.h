@@ -17,15 +17,13 @@ public:
 	satori m_Satori;
 
 	static int totalFrames;
-	static float framerate;
 	static float fps;
 	static float currentTime;
 	static float iniTime;
 
 	int level;
 
-	void initGame();
-	BOOL startGame();
+	void startGame();
 	void stopGame();
 	void update();
 

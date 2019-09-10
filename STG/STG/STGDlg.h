@@ -1,8 +1,5 @@
 ﻿#include "Background.h"
 #include "Player.h"
-// STGDlg.h: 头文件
-//
-
 #pragma once
 
 
@@ -26,13 +23,11 @@ public:
 protected:
 	HICON m_hIcon;
 	CMenu m_menu;
-	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnUpdateStart(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateQuit(CCmdUI* pCmdUI);
 	afx_msg void OnStart();
 	afx_msg void OnEasy();

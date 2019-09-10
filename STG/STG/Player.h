@@ -12,7 +12,7 @@ public:
 	int yPos;
 	int xSpeed;
 	int ySpeed;
-	static int speed;
+	static float speed;
 	bool slow;
 	bool rebirth;
 	CImage m_pngPlayer;
