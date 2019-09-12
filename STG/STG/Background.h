@@ -12,29 +12,32 @@
 class Background : public CWnd
 {
 public:
-	int death;
-	Player m_Player;
-	satori m_Satori;
+	int death;					//死亡次数
+	Player m_Player;			//玩家
+	satori m_Satori;			//敌人
 
-	static int totalFrames;
-	static float fps;
-	static float currentTime;
-	static float iniTime;
+	CImage m_pngBackground;		//背景图
 
-	int level;
+	static int totalFrames;		//游戏运行总帧数
+	static float fps;			//游戏当前fps
+	static float currentTime;	//每次update的时间
+	static float iniTime;		//游戏开始时的时间
 
-	void startGame();
+	int level;					//游戏难度
+
+	void startGame();			
 	void stopGame();
 	void update();
 
-	Background() {};
+	Background() {};			//内容初始化由create完成
 	~Background() {};
+
+	//成员方法
+	void SetLevel(int level);
 
 	BOOL create(RECT& rect, CWnd* pParentWnd, UINT nID);
 
 
-protected:
-	CImage m_pngBackground;
 public:
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnPaint();

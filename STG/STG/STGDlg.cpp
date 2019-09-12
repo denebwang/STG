@@ -49,15 +49,15 @@ BOOL CSTGDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);	
 	SetIcon(m_hIcon, FALSE);
 
-	m_menu.LoadMenuW(IDR_MENU);
+	m_menu.LoadMenuW(IDR_MENU);												//加载菜单
 	SetMenu(& m_menu);
 
-	CMenu* level_menu= m_menu.GetSubMenu(1)->GetSubMenu(0);
+	CMenu* level_menu= m_menu.GetSubMenu(1)->GetSubMenu(0);					//设置难度为单选
 	level_menu->CheckMenuRadioItem(0, 3, 1, MF_BYPOSITION);
 
-	m_Background.create(CRect(0, 0, 0, 0), this, IDB_BG);
-	m_Background.level = LEVEL_NORM;
-	::SetWindowPos(this->m_hWnd, HWND_BOTTOM, 0, 0, 768, 960, SWP_NOZORDER);
+	m_Background.create(CRect(0, 0, 0, 0), this, IDB_BG);					//创建背景
+	m_Background.SetLevel(LEVEL_NORM);
+	::SetWindowPos(this->m_hWnd, HWND_BOTTOM, 0, 0, 768, 960, SWP_NOZORDER);//调整窗口大小
 	return TRUE; 
 }
 
@@ -106,7 +106,7 @@ void CSTGDlg::OnEasy()
 {
 	CMenu* level_menu = m_menu.GetSubMenu(1)->GetSubMenu(0);
 	level_menu->CheckMenuRadioItem(0, 3, 0, MF_BYPOSITION);
-	m_Background.level = LEVEL_EASY;
+	m_Background.SetLevel(LEVEL_EASY);
 }
 
 
@@ -114,7 +114,7 @@ void CSTGDlg::OnNormal()
 {
 	CMenu* level_menu = m_menu.GetSubMenu(1)->GetSubMenu(0);
 	level_menu->CheckMenuRadioItem(0, 3, 1, MF_BYPOSITION);
-	m_Background.level = LEVEL_NORM;
+	m_Background.SetLevel(LEVEL_NORM);
 }
 
 
@@ -122,7 +122,7 @@ void CSTGDlg::OnHard()
 {
 	CMenu* level_menu = m_menu.GetSubMenu(1)->GetSubMenu(0);
 	level_menu->CheckMenuRadioItem(0, 3, 2, MF_BYPOSITION);
-	m_Background.level = LEVEL_HARD;
+	m_Background.SetLevel(LEVEL_HARD);
 }
 
 
@@ -130,5 +130,5 @@ void CSTGDlg::OnLunatic()
 {
 	CMenu* level_menu = m_menu.GetSubMenu(1)->GetSubMenu(0);
 	level_menu->CheckMenuRadioItem(0, 3, 3, MF_BYPOSITION);
-	m_Background.level = LEVEL_LUNA;
+	m_Background.SetLevel(LEVEL_LUNA);
 }

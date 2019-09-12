@@ -3,19 +3,24 @@
 #include <atlimage.h>
 #include <list>
 #include "bullet.h"
+//敌人
 class satori :
 	public CWnd
 {
+private:
+	int xPos;					//坐标
+	int yPos;
+	
 public:
 	satori();
 	~satori() {};
 
-	int xPos;
-	int yPos;
-	std::list<bullet*> bullets;
-	CImage m_pngSatori;
+	CImage m_pngSatori;			//贴图
+	std::list<bullet*> bullets;	//所有发射的子弹
 
-	void shoot(int t,float );
-	void move(double t);
+	int Getx();
+	int Gety();
+
+	void shoot(int t,float );	//子弹发射函数
 };
 

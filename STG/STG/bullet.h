@@ -5,14 +5,14 @@ class bullet :
 	public CWnd
 {
 public:
-	int speed;
-	float angle;
-	float xPos;
+	int speed;						//子弹速度
+	float angle;					//飞行角度
+	float xPos;						//当前坐标
 	float yPos;
 
-	static CImage m_pngBullet;
+	static CImage m_pngBullet;		//所有子弹公用一个贴图
 
-	bullet(float xpos = 0, float ypos = 0, float angle = 0, int speed = 10);
-	void move();
+	bullet(float xpos, float ypos, float angle, int speed);
+	void move();					
 };
 
